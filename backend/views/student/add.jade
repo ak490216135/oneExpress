@@ -4,19 +4,25 @@ block content
     h1= title
     hr
     div.row
+        div.col-lg-2
+            a.btn.btn-success.btn-block(href = '/student') 学生管理
+        div.col-lg-2
+            a.btn.btn-success.btn-block(href = '/student/add') 添加
+    hr
+    div.row
         div.col-lg-12
             form(action = '/student/add', method = 'post').form-horizontal
                 div.form-group
-                    label(for = 'input_name', class = 'col-lg-2col-md-2 col-sm-2 control-label') 学生姓名
-                    div.col-lg-10.col-md-10.col-sm-10
+                    label(for = 'input_name', class = 'col-lg-1 col-md-1 col-sm-1 control-label') 学生姓名
+                    div.col-lg-11.col-md-11.col-sm-11
                         input(type = 'text', name = 'name', class = 'form-control', id = 'input_name', placeholder = '学生姓名')
                 div.form-group
-                    label(for = 'input_brith', class = 'col-lg-2col-md-2 col-sm-2 control-label') 出生日期
-                    div.col-lg-10.col-md-10.col-sm-10
+                    label(for = 'input_brith', class = 'col-lg-1 col-md-1 col-sm-1 control-label') 出生日期
+                    div.col-lg-11.col-md-11.col-sm-11
                         input(type = 'text', name = 'brith', class = 'form-control', id = 'input_brith', placeholder = '出生日期')
                 div.form-group
-                    label(class = 'col-lg-2col-md-2 col-sm-2 control-label') 性别
-                    div.col-lg-10.col-md-10.col-sm-10
+                    label(class = 'col-lg-1 col-md-1 col-sm-1 control-label') 性别
+                    div.col-lg-11.col-md-11.col-sm-11
                         div.radio
                             label
                                 input(type = 'radio', name = 'sex', checked = 'checked', value = '1')
@@ -26,10 +32,10 @@ block content
                                 input(type = 'radio', name = 'sex', value = '0')
                                 span 女
                 div.form-group
-                    label(class = 'col-lg-2col-md-2 col-sm-2 control-label') 描述
-                    div.col-lg-10.col-md-10.col-sm-10
+                    label(class = 'col-lg-1 col-md-1 col-sm-1 control-label') 描述
+                    div.col-lg-11.col-md-11.col-sm-11
                         textarea.form-control(name = 'description',style = 'height: 120px;', placeholder = '描述')
-                div.form-group
-                    div.col-lg-2.col-md-2.col-sm-2
-                    div.col-lg-10.col-md-10.col-sm-10
-                        button.btn.btn-primary(type = 'submit') 提交
+                div.row
+                    div.col-lg-1.col-md-1.col-sm-1
+                    div.col-lg-11.col-md-11.col-sm-11
+                        button.btn.btn-primary.btn-block(type = 'submit') 提交

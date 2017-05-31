@@ -3,7 +3,11 @@ extends ../layout
 block content
     h1= title
     hr
-    a.btn.btn-success(href = '/student/add') 添加
+    div.row
+        div.col-lg-2
+            a.btn.btn-success.btn-block(href = '/student') 学生管理
+        div.col-lg-2
+            a.btn.btn-success.btn-block(href = '/student/add') 添加
     hr
     table.table.table-striped
         thead.row
@@ -24,3 +28,4 @@ block content
                         a.btn(href = '/student/show/' + data[i].id) 查看
                         a.btn(href = '/student/edit/' + data[i].id) 编辑
                         a.btn(href = '/student/del/' + data[i].id) 删除
+    hr

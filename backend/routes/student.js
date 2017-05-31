@@ -1,10 +1,31 @@
 var express = require('express');
 var router = express.Router();
-var student = require('../model/student');
+var mysql = require('mysql');
+var db = require('../config/db');
+var sql = require('../config/sql');
+var pool = mysql.createPool(db.mysql);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    student.selectPage(req, res, next);
+    pool.getConnection(function (err, connection) {
+        connection.query(
+            sql.student.selectPage,
+            [0,10],
+            function (err, result) {
+                if (err) throw err;
+                res.render(
+                    'student/index',
+                    {
+                        title: '学生管理',
+                        href: '/student',
+                        num: result.length,
+                        data: result
+                    }
+                );
+                connection.release(); // 释放连接
+            }
+        );
+    });
 });
 
 router.get('/add', function(req, res, next) {
