@@ -26,3 +26,8 @@
   color: #fff;
 }
 .main .right{}
+.main .right table{}
+.main .right table tr{}
+.main .right table tr td{
+  vertical-align: baseline;
+}

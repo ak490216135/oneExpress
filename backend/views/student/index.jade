@@ -3,6 +3,24 @@ extends ../layout
 block content
     h1= title
     hr
-    ul
-        - for(var i = 0; i < num; i++)
-            li data
+    a.btn.btn-success(href = '/student/add') 添加
+    hr
+    table.table.table-striped
+        thead.row
+            tr
+                th.col-md-1 #
+                th.col-md-4 姓名
+                th.col-md-2 性别
+                th.col-md-3 出生日期
+                th.col-md-2 操作
+        tbody.row
+            - for(var i = 0; i < num; i++)
+                tr
+                    td= i + 1
+                    td= data[i].name
+                    td= data[i].sex
+                    td= data[i].brith
+                    td
+                        a.btn(href = '/student/show/' + data[i].id) 查看
+                        a.btn(href = '/student/edit/' + data[i].id) 编辑
+                        a.btn(href = '/student/del/' + data[i].id) 删除
