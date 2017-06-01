@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+    h1= title
+    hr
+    div.row
+        div.col-lg-2
+            a.btn.btn-primary.btn-block(href = '/student') 学生管理
+        div.col-lg-2
+            a.btn.btn-primary.btn-block(href = '/student/add') 添加
+    hr
+    h2= data.name
+    table.table.table-hover
+        thead.row
+            tr
+                th.col-md-2 项目
+                th.col-md-4 值
+        tbody.row
+            tr
+                td id
+                td= data.id
+            tr
+                td 名称
+                td= data.name
+            tr
+                td 性别
+                td= data.sex
+            tr
+                td 出生日期
+                td= data.birth
+            tr
+                td 简介
+                td= data.description
+    div.row
+        div.col-lg-2
+            a.btn.btn-success.btn-block(href = '/student/edit/' + data.id) 编辑
+        div.col-lg-2
+            a.btn.btn-danger.btn-block(href = '/student/del/' + data.id) 删除
+    hr

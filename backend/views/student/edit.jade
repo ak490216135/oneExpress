@@ -1,0 +1,62 @@
+extends ../layout
+
+block content
+    h1= title
+    hr
+    div.row
+        div.col-lg-2
+            a.btn.btn-primary.btn-block(href = '/student') 学生管理
+        div.col-lg-2
+            a.btn.btn-primary.btn-block(href = '/student/add') 添加
+    hr
+    h2= data.name
+    form(action = '/student/edit', method = 'post').form-horizontal
+        table.table.table-hover
+            thead.row
+                tr
+                    th.col-md-2 项目
+                    th.col-md-4 值
+            tbody.row
+                tr
+                    td id
+                    td= data.id
+                        input(type = 'hidden', name = 'id', value = data.id).form-control
+                tr
+                    td 名称
+                    td
+                        input(type = 'text', name = 'name', value = data.name).form-control
+                tr
+                    td 性别
+                    td
+                        - if (data.sex)
+                            div.radio
+                                label
+                                    input(type = 'radio', name = 'sex', checked = 'checked', value = '1')
+                                    span 男
+                            div.radio
+                                label
+                                    input(type = 'radio', name = 'sex', value = '1')
+                                    span 女
+                        -else
+                            div.radio
+                                label
+                                    input(type = 'radio', name = 'sex', value = '1')
+                                    span 男
+                            div.radio
+                                label
+                                    input(type = 'radio', name = 'sex', checked = 'checked', value = '1')
+                                    span 女
+                tr
+                    td 出生日期
+                    td
+                        input(type = 'text', name = 'birth', value = data.birth).form-control
+                tr
+                    td 简介
+                    td
+                        textarea(name = 'description', style = 'height: 120px;').form-control #{data.description}
+        div.row
+            div.col-lg-2
+                button(type = 'submit').btn.btn-success.btn-block 提交
+            div.col-lg-2
+                a.btn.btn-danger.btn-block(href = '/student/del/' + data.id) 删除
+    hr

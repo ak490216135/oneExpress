@@ -22,8 +22,12 @@ block content
                 tr
                     td= i + 1
                     td= data[i].name
-                    td= data[i].sex
-                    td= data[i].brith
+                    td
+                        - if(data[i].sex)
+                            span 男
+                        - else
+                            span 女
+                    td= data[i].birth
                     td
                         a.btn(href = '/student/show/' + data[i].id) 查看
                         a.btn(href = '/student/edit/' + data[i].id) 编辑
