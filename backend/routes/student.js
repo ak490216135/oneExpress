@@ -8,9 +8,10 @@ var pool = mysql.createPool(db.mysql);
 /* GET home page. */
 router.get('/', function(req, res, next) {
     pool.getConnection(function (err, connection) {
+        var page_num = 10;
         connection.query(
             sql.student.selectPage,
-            [0,10],
+            [0,page_num],
             function (err, result) {
                 if (err) throw err;
                 res.render(
@@ -22,6 +23,39 @@ router.get('/', function(req, res, next) {
                         data: result
                     }
                 );
+                connection.release(); // 释放连接
+            }
+        );
+    });
+});
+
+router.get('/show/:id', function(req, res, next) {
+    pool.getConnection(function (err, connection) {
+        var page_num = 10;
+        connection.query(
+            sql.student.selectOne,
+            [req.params.id],
+            function (err, result) {
+                if (err) throw err;
+                if(result.length === 1){
+                    res.render(
+                        'student/show',
+                        {
+                            title: '学生管理',
+                            href: '/student',
+                            data: result[0]
+                        }
+                    );
+                }else{
+                    res.render(
+                        'jump',
+                        {
+                            title: '学生管理',
+                            href: '/student',
+                            info: '访问错误,点击返回'
+                        }
+                    );
+                }
                 connection.release(); // 释放连接
             }
         );
@@ -58,6 +92,40 @@ router.post('/add', function(req, res, next) {
         }
     );
     connection.end();
+});
+
+router.get('/del/:id', function(req, res, next) {
+    pool.getConnection(function (err, connection) {
+        var page_num = 10;
+        connection.query(
+            sql.student.deleteOne,
+            [req.params.id],
+            function (err, result) {
+                console.log(result);
+                if (err) throw err;
+                if(result.affectedRows === 1){
+                    res.render(
+                        'jump',
+                        {
+                            title: '学生管理',
+                            href: '/student',
+                            info: '删除成功,点击返回'
+                        }
+                    );
+                }else{
+                    res.render(
+                        'jump',
+                        {
+                            title: '学生管理',
+                            href: '/student',
+                            info: '访问错误,点击返回'
+                        }
+                    );
+                }
+                connection.release(); // 释放连接
+            }
+        );
+    });
 });
 
 module.exports = router;

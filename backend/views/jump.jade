@@ -4,8 +4,9 @@ block content
     h1= title
     hr
     h2
-        a(href = '' + href)= info
+        a(href = '' + href, id = 'jump')= info
+        p 2秒后返回，如未自动跳转请点击
     script(type='text/javascript').
-        /*setTimeout(function () {
-            window.location.href( href );
-        }, 2000);*/
+        setTimeout(function () {
+            window.location.href = document.getElementById('jump').getAttribute('href');
+        }, 2000);
