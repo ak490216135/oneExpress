@@ -10,10 +10,27 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-06-01 17:58:02
+Date: 2017-06-02 18:33:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `grade`
+-- ----------------------------
+DROP TABLE IF EXISTS `grade`;
+CREATE TABLE `grade` (
+  `gid` int(50) NOT NULL AUTO_INCREMENT,
+  `grade_name` varchar(200) NOT NULL,
+  `parent_gid` int(50) DEFAULT NULL,
+  `description` text,
+  `tid` int(50) DEFAULT NULL,
+  PRIMARY KEY (`gid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of grade
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `student`

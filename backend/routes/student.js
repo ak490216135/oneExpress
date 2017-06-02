@@ -7,28 +7,41 @@ var pool = mysql.createPool(db.mysql);
 
 /* GET home page. */
 // 首页
-router.get('/', function(req, res, next) {
+var index = function(req, res, next) {
     pool.getConnection(function (err, connection) {
         var page_num = 10;
+        var page = 0;
+        if( typeof (req.params.p) == 'undefined' ){req.params.p = 1;}
+        if (req.params.p <= 0){req.params.p = 1;}
         connection.query(
-            sql.student.selectPage,
-            [0,page_num],
+            sql.student.selectPage + sql.student.selectCount,
+            [(req.params.p - 1) * 10,page_num],
             function (err, result) {
                 if (err) throw err;
+                var left = page - 1;
+                var right = page + 1;
                 res.render(
                     'student/index',
                     {
                         title: '学生管理',
                         href: '/student',
-                        num: result.length,
-                        data: result
+                        num: result[0].length,
+                        page: {
+                            page: page,
+                            left: left,
+                            right: right,
+                            count: result[1][0].count
+                        },
+                        data: result[0]
                     }
                 );
                 connection.release(); // 释放连接
             }
         );
     });
-});
+};
+router.get('/', index);
+router.get('/p/:p', index);
 
 // 单条展示
 router.get('/show/:id', function(req, res, next) {

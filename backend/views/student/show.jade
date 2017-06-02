@@ -24,7 +24,11 @@ block content
                 td= data.name
             tr
                 td 性别
-                td= data.sex
+                td
+                    - if (data.sex)
+                        span 男
+                    - else
+                        span 女
             tr
                 td 出生日期
                 td= data.birth
