@@ -33,11 +33,20 @@ block content
                         a.btn(href = '/student/edit/' + data[i].id) 编辑
                         a.btn(href = '/student/del/' + data[i].id) 删除
     hr
-    p #{page.page} #{page.count}
     ul.pager
-        li.previous.disabled(style = 'float: left;')
-            a(href = '') LEFT
-                span &larr;
-        li.previous(style = 'float: right;')
-            a(href = '') RIGHT
-                span &rarr;
+        - if(page.left == page.p)
+            li.previous.disabled(style = 'float: left;')
+                a(href = '/student/p/' + page.left) LEFT
+                    span &larr;
+        - else
+            li.previous(style = 'float: left;')
+                a(href = '/student/p/' + page.left) LEFT
+                    span &larr;
+        - if(page.right == page.p)
+            li.previous.disabled(style = 'float: right;')
+                a(href = '/student/p/' + page.right) RIGHT
+                    span &rarr;
+        - else
+            li.previous(style = 'float: right;')
+                a(href = '/student/p/' + page.right) RIGHT
+                    span &rarr;

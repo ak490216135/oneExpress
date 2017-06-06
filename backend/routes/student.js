@@ -18,8 +18,17 @@ var index = function(req, res, next) {
             [(req.params.p - 1) * 10,page_num],
             function (err, result) {
                 if (err) throw err;
-                var left = page - 1;
-                var right = page + 1;
+                if (req.params.p <= 1){
+                    var left = 1;
+                }else{
+                    var left = req.params.p - 1;
+                }
+                if(req.params.p >= Math.ceil(result[1][0].count / page_num)){
+                    var left = Math.ceil(result[1][0].count / page_num) - 1;
+                    var right = Math.ceil(result[1][0].count / page_num);
+                }else{
+                    var right = Number(req.params.p) + 1;
+                }
                 res.render(
                     'student/index',
                     {
@@ -27,9 +36,10 @@ var index = function(req, res, next) {
                         href: '/student',
                         num: result[0].length,
                         page: {
-                            page: page,
                             left: left,
                             right: right,
+                            p: req.params.p,
+                            page: Math.ceil(result[1][0].count / page_num),
                             count: result[1][0].count
                         },
                         data: result[0]
