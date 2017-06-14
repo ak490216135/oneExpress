@@ -37,16 +37,12 @@ block content
         - if(page.left == page.p)
             li.previous.disabled(style = 'float: left;')
                 a(href = '/student/p/' + page.left) LEFT
-                    span &larr;
         - else
             li.previous(style = 'float: left;')
                 a(href = '/student/p/' + page.left) LEFT
-                    span &larr;
         - if(page.right == page.p)
             li.previous.disabled(style = 'float: right;')
                 a(href = '/student/p/' + page.right) RIGHT
-                    span &rarr;
         - else
             li.previous(style = 'float: right;')
                 a(href = '/student/p/' + page.right) RIGHT
-                    span &rarr;

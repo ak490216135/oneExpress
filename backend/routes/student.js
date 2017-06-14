@@ -5,6 +5,13 @@ var db = require('../config/db');
 var sql = require('../config/sql');
 var pool = mysql.createPool(db.mysql);
 
+var time = function timeLog(req, res, next) {
+    console.log('TIME: ', Date.now());
+    next();
+}
+
+router.use(time);
+
 /* GET home page. */
 // 首页
 var index = function(req, res, next) {
