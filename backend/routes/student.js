@@ -6,6 +6,8 @@ var sql = require('../config/sql');
 var pool = mysql.createPool(db.mysql);
 
 var time = function timeLog(req, res, next) {
+    // 获取session信息
+    console.log( '当前用户 : ' + req.session.username );
     console.log('TIME: ', Date.now());
     next();
 }
@@ -15,6 +17,7 @@ router.use(time);
 /* GET home page. */
 // 首页
 var index = function(req, res, next) {
+
     pool.getConnection(function (err, connection) {
         var page_num = 10;
         var page = 0;

@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+        title= title
+        link(rel = 'stylesheet', href = '/bootstrap-3.3.7-dist/css/bootstrap.css')
+        link(rel = 'stylesheet', href = '/stylesheets/style.css')
+    body
+        //block content
+        div.container.main
+            div.row.login
+                div.col-lg-2.col-md-2.col-sm-2.col-xs-2
+                div.col-lg-8.col-md-8.col-sm-8.col-xs-8.login_main
+                    form(action = '/login/login', method = 'post')
+                        div.form-group
+                            input(type = 'text', name = 'username', class = 'form-control', id = 'username', placeholder = 'username')
+                        div.form-group
+                            input(type = 'text', name = 'password', class = 'form-control', id = 'password', placeholder = 'password')
+                        div.form-group
+                            button(type = 'submit').btn.btn-primary.btn-block 登陆
+                div.col-lg-2.col-md-2.col-sm-2.col-xs-2
+
+
+        script(type='javascript', src='/javascripts/jquery-3.2.1.slim.min.js')
+        script(type='javascript', src='/bootstrap-3.3.7-dist/js/bootstrap.js')
+        script(type='javascript', src='/javascripts/main.js')

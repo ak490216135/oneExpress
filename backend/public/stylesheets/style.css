@@ -1,33 +1,38 @@
 .main{
 }
 .main .left{
-  background-color: #f5f5f5;
-  border-right: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  padding: 0px;
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 0px;
 }
 .main .left ul{
 }
 .main .left ul li {
 }
 .main .left ul li a{
-  font-size: 14px;
+    font-size: 14px;
 }
 .main .left ul .active{
-  background-color: #428bca;
+    background-color: #428bca;
 }
 .main .left ul .active:hover{
-  background-color: #428bca;
+    background-color: #428bca;
 }
 .main .left ul .active a{
-  color: #fff;
+    color: #fff;
 }
 .main .left ul .active a:hover{
-  color: #fff;
+    color: #fff;
 }
 .main .right{}
 .main .right table{}
 .main .right table tr{}
 .main .right table tr td{
-  vertical-align: baseline;
+    vertical-align: baseline;
+}
+
+.main .login{}
+.main .login .login_main{
+    margin-top: 35%;
 }
