@@ -4,17 +4,10 @@ var mysql = require('mysql');
 var db = require('../config/db');
 var sql = require('../config/sql');
 var pool = mysql.createPool(db.mysql);
+var access = require('../routes/access');
 
-var time = function timeLog(req, res, next) {
-    // 获取session信息
-    console.log( '当前用户 : ' + req.session.username );
-    console.log('TIME: ', Date.now());
-    next();
-}
+router.use(access);
 
-router.use(time);
-
-/* GET home page. */
 // 首页
 var index = function(req, res, next) {
 
@@ -52,7 +45,12 @@ var index = function(req, res, next) {
                             page: Math.ceil(result[1][0].count / page_num),
                             count: result[1][0].count
                         },
-                        data: result[0]
+                        data: result[0],
+                        session_info: {
+                            user_id: req.session.user_id,
+                            user_name: req.session.user_name,
+                            user_username: req.session.user_username
+                        }
                     }
                 );
                 connection.release(); // 释放连接
@@ -78,7 +76,12 @@ router.get('/show/:id', function(req, res, next) {
                         {
                             title: '学生展示',
                             href: '/student',
-                            data: result[0]
+                            data: result[0],
+                            session_info: {
+                                user_id: req.session.user_id,
+                                user_name: req.session.user_name,
+                                user_username: req.session.user_username
+                            }
                         }
                     );
                 }else{
@@ -87,7 +90,12 @@ router.get('/show/:id', function(req, res, next) {
                         {
                             title: '学生展示',
                             href: '/student',
-                            info: '访问错误,点击返回'
+                            info: '访问错误,点击返回',
+                            session_info: {
+                                user_id: req.session.user_id,
+                                user_name: req.session.user_name,
+                                user_username: req.session.user_username
+                            }
                         }
                     );
                 }
@@ -99,7 +107,7 @@ router.get('/show/:id', function(req, res, next) {
 
 // 添加页面
 router.get('/add', function(req, res, next) {
-    res.render('student/add', { title: '学生添加' });
+    res.render('student/add', { title: '学生添加' , session_info: { user_id: req.session.user_id, user_name: req.session.user_name, user_username: req.session.user_username } });
 });
 // 添加数据接收
 router.post('/add', function(req, res, next) {
@@ -121,7 +129,12 @@ router.post('/add', function(req, res, next) {
                         {
                             title: '学生添加',
                             href: '/student',
-                            info: '添加成功,点击返回'
+                            info: '添加成功,点击返回',
+                            session_info: {
+                                user_id: req.session.user_id,
+                                user_name: req.session.user_name,
+                                user_username: req.session.user_username
+                            }
                         }
                     );
                 }else{
@@ -130,7 +143,12 @@ router.post('/add', function(req, res, next) {
                         {
                             title: '学生添加',
                             href: '/student/add',
-                            info: '添加错误,点击返回'
+                            info: '添加错误,点击返回',
+                            session_info: {
+                                user_id: req.session.user_id,
+                                user_name: req.session.user_name,
+                                user_username: req.session.user_username
+                            }
                         }
                     );
                 }
@@ -173,6 +191,7 @@ router.get('/edit/:id', function(req, res, next) {
         );
     });
 });
+
 // 编辑数据接收
 router.post('/edit', function(req, res, next) {
     pool.getConnection(function (err, connection) {

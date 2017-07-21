@@ -21,9 +21,9 @@ html
           hr(style = 'margin: 0px 0px 0px 0px;')
           ul.nav.nav-sidebar
             li
-              a(href = '/' style = '').success 当前登录: 490216135@qq.com
+              a(href = '/' style = '').success= '当前用户: ' + session_info.user_name
             li
-              a(href = '/') 点击退出
+              a(href = '/login/logout') 点击退出
 
         div.col-sm-10.right
           block content
