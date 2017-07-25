@@ -6,7 +6,7 @@ var sql = require('../config/sql');
 var pool = mysql.createPool(db.mysql);
 var access = require('../routes/access');
 
-router.use(access);
+//router.use(access);
 
 router.get('/', function(req, res, next) {
     if( typeof(req.session.username) == 'undefined' ){
